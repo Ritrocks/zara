@@ -1,16 +1,86 @@
 <html>
     <head>
         <style>
+            body{
+                width:100%;
+                height:100%;
+                margin:0;
+            }
             iframe {
                 position: fixed;
                 top:0%;
                 left:0;
                 width:100%;
                 height:100%;
+                z-index:1;
+            }
+            #loader{
+                position:fixed;
+                width:100%;
+                height:100%;
+                z-index:2;
+                background-color:black;
+            }
+            video{
+                width:100%;
+                height:100%;
+                object-fit:contain;
+            }
+            h1 {
+                position:fixed;
+                top:60%;
+                left:37%;
+                color:black;
+                z-index:2;
+                font-family:arial;
+            }
+            .red{
+                top:62%;
+                color:red;
             }
         </style>
     </head>
-    <body>
+    <body onload="load()";>
         <iframe src="https://web.archive.org/web/20130608031336/http://www.zara.com/us/"></iframe>
+        <div id="loader">
+            <video autoplay muted>
+                <source src="escalator.mp4" type="video/mp4">
+            </video>
+            <h1>Escalating. Please wait a moment...<br>
+                Escalating. Please wait a moment...<br>
+                Escalating. Please wait a moment...<br>
+                Escalating. Please wait a moment...<br>
+                Escalating. Please wait a moment...<br>
+                Escalating. Please wait a moment...<br>
+                Escalating. Please wait a moment...<br>
+                Escalating. Please wait a moment...<br>
+                Escalating. Please wait a moment...<br></h1>
+                <h1 class="red">Escalating. Please wait a moment...</h1>
+                <audio id="noise">
+                    <source src="escalator noise.mp3" type="audio/mp3">
+                </audio>
+            </div>
+            <script>
+                function yes(){
+                    document.getElementById("noise").play();
+                }
+                function load(){
+                    setTimeout(() => {
+                        document.getElementById("loader").style.display="none";
+                        document.getElementById("noise").pause();
+                    }, 5000);
+                }
+                if (document.readyState !== 'loading') {
+                    setTimeout(() => {
+                        yes();
+                    }, 1000);
+                } else {
+                    document.addEventListener('DOMContentLoaded', function () {
+                        setTimeout(() => {
+                        yes();
+                    }, 1000);
+                    });
+                }
+            </script>
     </body>
 </html>
